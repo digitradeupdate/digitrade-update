@@ -1,88 +1,205 @@
-
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="ha">
 <head>
-  <meta charset="UTF-8">
-  <title>Digitrade Update</title>
-  <link rel="stylesheet" href="style.css">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Digitrade Update – Homepage</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --panel: #111827;
+      --muted: #94a3b8;
+      --text: #e5e7eb;
+      --brand: #22c55e;
+      --brand-2: #06b6d4;
+      --radius: 16px;
+      --shadow: 0 10px 25px rgba(0,0,0,0.35);
+      --gap: 14px;
+      --maxw: 1200px;
+    }html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  background: radial-gradient(1200px 800px at 0% -10%, rgba(34,197,94,0.12), transparent),
+              radial-gradient(900px 600px at 100% 10%, rgba(6,182,212,0.12), transparent),
+              var(--bg);
+  color: var(--text);
+}
+
+a { color: var(--brand-2); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.wrap {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 24px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+@media (min-width: 960px) {
+  .wrap {
+    grid-template-columns: 1fr 280px;
+    align-items: start;
+  }
+}
+
+header.site {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.brand { display: flex; align-items: center; gap: 12px; }
+.logo {
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--brand), var(--brand-2));
+  box-shadow: var(--shadow);
+}
+.title { font-size: 24px; font-weight: 700; }
+.subtitle { color: var(--muted); font-size: 14px; }
+
+.sidebar {
+  position: sticky;
+  top: 12px;
+  background: rgba(17,24,39,0.7);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(148,163,184,0.2);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 16px;
+}
+
+.nav-title { font-weight: 700; margin-bottom: 8px; }
+.nav a {
+  display: block;
+  padding: 10px 12px;
+  margin-bottom: 8px;
+  border-radius: 12px;
+  border: 1px solid rgba(148,163,184,0.2);
+  background: linear-gradient(180deg, rgba(148,163,184,0.12), rgba(148,163,184,0.04));
+}
+.nav a:hover { filter: brightness(1.08); }
+
+section {
+  background: rgba(17,24,39,0.6);
+  border: 1px solid rgba(148,163,184,0.2);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 18px;
+}
+
+h2 { margin: 0 0 12px 0; font-size: 20px; }
+.lead { color: var(--muted); margin-bottom: 18px; }
+
+.grid { display: grid; grid-template-columns: 1fr; gap: var(--gap); }
+@media (min-width: 600px) {
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 1000px) {
+  .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+.card {
+  display: flex; flex-direction: column; gap: 10px;
+  background: linear-gradient(180deg, rgba(2,6,23,0.35), rgba(2,6,23,0.15));
+  border: 1px solid rgba(148,163,184,0.2);
+  border-radius: 14px;
+  overflow: clip;
+}
+.banner { aspect-ratio: 16/9; background: #0b1020; display: grid; place-items: center; color: var(--muted); }
+.card-body { padding: 12px; }
+.card h3 { margin: 0 0 6px 0; font-size: 16px; }
+.meta { color: var(--muted); font-size: 12px; }
+.btn-row { display: flex; gap: 8px; margin-top: 10px; }
+.btn { padding: 10px 12px; border-radius: 12px; border: 1px solid rgba(148,163,184,0.25); background: linear-gradient(180deg, rgba(34,197,94,0.18), rgba(34,197,94,0.10)); color: var(--text); font-size: 14px; font-weight: 600; text-decoration: none; }
+.btn.alt { background: linear-gradient(180deg, rgba(6,182,212,0.18), rgba(6,182,212,0.10)); }
+
+details { border-top: 1px dashed rgba(148,163,184,0.35); padding-top: 10px; margin-top: 8px; }
+summary { cursor: pointer; color: var(--brand-2); }
+details[open] summary { color: var(--brand); }
+
+footer { max-width: var(--maxw); margin: 20px auto 60px auto; color: var(--muted); text-align: center; font-size: 12px; }
+h2 { scroll-margin-top: 18px; }
+
+  </style>
 </head>
 <body>
-
-  <!-- ?? TOP MENU -->
-  <header class="top-menu">
-    <div class="logo">?? Digitrade Update</div>
-    <div class="language-select">
-      <select>
-        <option>English</option>
-        <option>Hausa</option>
-      </select>
+  <header class="site">
+    <div class="brand">
+      <div class="logo"></div>
+      <div>
+        <div class="title">Digitrade Update</div>
+        <div class="subtitle">Shafin taimako ga ɗalibai: Online Works, Mining & Trading</div>
+      </div>
     </div>
-  </header>
+  </header>  <main class="wrap">
+    <div class="content">
+      <!-- Online Works Section -->
+      <section id="online-works">
+        <h2>Online Works</h2>
+        <div class="grid">
+          <!-- Repeat 10 cards -->
+          <article class="card"><div class="banner">Banner</div><div class="card-body"><h3>Aiki 1</h3><div class="meta">Bayani</div></div></article>
+          <article class="card"><div class="banner">Banner</div><div class="card-body"><h3>Aiki 2</h3><div class="meta">Bayani</div></div></article>
+          <article class="card"><div class="banner">Banner</div><div class="card-body"><h3>Aiki 3</h3><div class="meta">Bayani</div></div></article>
+          <article class="card"><div class="banner">Banner</div><div class="card-body"><h3>Aiki 4</h3><div class="meta">Bayani</div></div></article>
+          <article class="card"><div class="banner">Banner</div><div class="card-body"><h3>Aiki 5</h3><div class="meta">Bayani</div></div></article>
+          <article class="card"><div class="banner">Banner</div><div class="card-body"><h3>Aiki 6</h3><div class="meta">Bayani</div></div></article>
+          <article class="card"><div class="banner">Banner</div><div class="card-body"><h3>Aiki 7</h3><div class="meta">Bayani</div></div></article>
+          <article class="card"><div class="banner">Banner</div><div class="card-body"><h3>Aiki 8</h3><div class="meta">Bayani</div></div></article>
+          <article class="card"><div class="banner">Banner</div><div class="card-body"><h3>Aiki 9</h3><div class="meta">Bayani</div></div></article>
+          <article class="card"><div class="banner">Banner</div><div class="card-body"><h3>Aiki 10</h3><div class="meta">Bayani</div></div></article>
+        </div>
+      </section><!-- Mining Section -->
+  <section id="mining">
+    <h2>Mining</h2>
+    <div class="grid">
+      <!-- Repeat 10 cards -->
+      <article class="card"><div class="banner">Banner</div><div class="card-body"><h3>Mining 1</h3><div class="meta">Bayani</div></div></article>
+      <article class="card"><div class="banner">Banner</div><div class="card-body"><h3>Mining 2</h3><div class="meta">Bayani</div></div></article>
+      <article class="card"><div class="banner">Banner</div><div class="card-body"><h3>Mining 3</h3><div class="meta">Bayani</div></div></article>
+      <article class="card"><div class="banner">Banner</div><div class="card-body"><h3>Mining 4</h3><div class="meta">Bayani</div></div></article>
+      <article class="card"><div class="banner">Banner</div><div class="card-body"><h3>Mining 5</h3><div class="meta">Bayani</div></div></article>
+      <article class="card"><div class="banner">Banner</div><div class="card-body"><h3>Mining 6</h3><div class="meta">Bayani</div></div></article>
+      <article class="card"><div class="banner">Banner</div><div class="card-body"><h3>Mining 7</h3><div class="meta">Bayani</div></div></article>
+      <article class="card"><div class="banner">Banner</div><div class="card-body"><h3>Mining 8</h3><div class="meta">Bayani</div></div></article>
+      <article class="card"><div class="banner">Banner</div><div class="card-body"><h3>Mining 9</h3><div class="meta">Bayani</div></div></article>
+      <article class="card"><div class="banner">Banner</div><div class="card-body"><h3>Mining 10</h3><div class="meta">Bayani</div></div></article>
+    </div>
+  </section>
 
-  <!-- ?? NAVIGATION BUTTONS -->
-  <nav class="side-nav">
-    <a href="#online">Online Works</a>
-    <a href="#mining">Mining</a>
-    <a href="#trading">Trading</a>
+  <!-- Trading Section -->
+  <section id="trading">
+    <h2>Trading</h2>
+    <div class="grid">
+      <!-- Repeat 10 cards -->
+      <article class="card"><div class="banner">Banner</div><div class="card-body"><h3>Trading 1</h3><div class="meta">Bayani</div></div></article>
+      <article class="card"><div class="banner">Banner</div><div class="card-body"><h3>Trading 2</h3><div class="meta">Bayani</div></div></article>
+      <article class="card"><div class="banner">Banner</div><div class="card-body"><h3>Trading 3</h3><div class="meta">Bayani</div></div></article>
+      <article class="card"><div class="banner">Banner</div><div class="card-body"><h3>Trading 4</h3><div class="meta">Bayani</div></div></article>
+      <article class="card"><div class="banner">Banner</div><div class="card-body"><h3>Trading 5</h3><div class="meta">Bayani</div></div></article>
+      <article class="card"><div class="banner">Banner</div><div class="card-body"><h3>Trading 6</h3><div class="meta">Bayani</div></div></article>
+      <article class="card"><div class="banner">Banner</div><div class="card-body"><h3>Trading 7</h3><div class="meta">Bayani</div></div></article>
+      <article class="card"><div class="banner">Banner</div><div class="card-body"><h3>Trading 8</h3><div class="meta">Bayani</div></div></article>
+      <article class="card"><div class="banner">Banner</div><div class="card-body"><h3>Trading 9</h3><div class="meta">Bayani</div></div></article>
+      <article class="card"><div class="banner">Banner</div><div class="card-body"><h3>Trading 10</h3><div class="meta">Bayani</div></div></article>
+    </div>
+  </section>
+</div>
+
+<aside class="sidebar">
+  <div class="nav-title">Kewayawa</div>
+  <nav class="nav">
+    <a href="#online-works">↳ Online Works</a>
+    <a href="#mining">↳ Mining</a>
+    <a href="#trading">↳ Trading</a>
   </nav>
+</aside>
 
-  <!-- ?? MAIN CONTENT -->
-  <main class="content">
-
-    <!-- ?? ONLINE WORKS -->
-    <section id="online">
-      <h2>?? Online Works</h2>
-      <div class="card-list">
-        <!-- Card 1-10 -->
-        <div class="card"> <img src="banner1.jpg" alt="Banner"><h3>Work Title 1</h3><p>Short Description...</p><a href="#">More Info</a></div>
-        <!-- ...repeat for cards 2 to 10 -->
-      </div>
-    </section>
-
-    <!-- ?? MINING -->
-    <section id="mining">
-      <h2>?? Mining</h2>
-      <div class="card-list">
-        <!-- Card 1-10 -->
-        <div class="card"> <img src="banner11.jpg" alt="Banner"><h3>Mining 1</h3><p>Short Description...</p><a href="#">More Info</a></div>
-        <!-- ...repeat for cards 2 to 10 -->
-      </div>
-    </section>
-
-    <!-- ?? TRADING -->
-    <section id="trading">
-      <h2>?? Trading</h2>
-      <div class="card-list">
-        <!-- Card 1-10 -->
-        <div class="card"> <img src="banner21.jpg" alt="Banner"><h3>Trading 1</h3><p>Short Description...</p><a href="#">More Info</a></div>
-        <!-- ...repeat for cards 2 to 10 -->
-      </div>
-    </section>
-
-    <!-- ??? COMMENT SECTION -->
-    <section class="comment-section">
-      <h3>Leave a Comment</h3>
-      <form>
-        <input type="text" placeholder="Your name" required>
-        <textarea placeholder="Your comment..." required></textarea>
-        <button type="submit">Submit</button>
-      </form>
-    </section>
-
-  </main>
-
-  <!-- ?? FOOTER with SOCIAL MEDIA -->
-  <footer class="footer">
-    <p>Connect with us:</p>
-    <div class="social-links">
-      <a href="#">Facebook</a>
-      <a href="#">YouTube</a>
-      <a href="#">LinkedIn</a>
-      <a href="#">TikTok</a>
-    </div>
+  </main>  <footer>
+    © 2025 Digitrade Update. Duk haƙƙoƙi na musamman.
   </footer>
-
 </body>
 </html>
-
