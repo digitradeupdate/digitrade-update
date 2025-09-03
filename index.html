@@ -4,124 +4,54 @@
 <meta charset="UTF-8">
 <title>Digitrade Update</title>
 <style>
-  body {
-    font-family: Arial, sans-serif;
-    background: #f5f5f5;
-    margin: 0;
-    padding: 0;
+  body { font-family: Arial, sans-serif; background:#f5f5f5; margin:0; padding:0; }
+  
+  /* Top Menu Box */
+  #topMenuBox {
+    background: #007bff; color: white;
+    padding: 15px 20px;
+    display: flex; justify-content: space-between; align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
   }
+  #topMenuBox select, #topMenuBox button {
+    padding:5px 10px; border-radius:5px; border:none; cursor:pointer;
+  }
+  #topMenuBox select { margin-right:10px; }
 
-  /* Top Menu */
-  #topMenu {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #007bff;
-    padding: 10px 20px;
-    color: white;
-  }
-  #topMenu select, #topMenu button {
-    padding: 5px 10px;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-  }
-
-  #topMenu select { margin-right: 10px; }
-
-  /* Container */
-  .main-container {
-    padding: 20px;
-    text-align: center;
-  }
+  /* Main Container */
+  .main-container { padding:20px; text-align:center; }
 
   /* Admin Controls */
-  #adminControls {
-    margin: 10px 0;
-  }
-  #adminControls button {
-    margin: 5px;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    background: #28a745;
-    color: white;
-    cursor: pointer;
-  }
-  #adminControls button:hover { background: #1e7e34; }
+  #adminControls { margin:10px 0; display:none; }
+  #adminControls button { margin:5px; padding:10px 15px; border:none; border-radius:5px; background:#28a745; color:white; cursor:pointer; }
+  #adminControls button:hover { background:#1e7e34; }
 
   input[type="text"], select, textarea {
-    width: 60%;
-    padding: 6px;
-    margin: 5px 0;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+    width:60%; padding:6px; margin:5px 0; border-radius:5px; border:1px solid #ccc;
   }
 
-  /* Filter buttons */
-  #filterButtons button {
-    margin: 5px;
-    padding: 8px 12px;
-    background: #17a2b8;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  #filterButtons button:hover { background: #117a8b; }
+  /* Filter Buttons */
+  #filterButtons button { margin:5px; padding:8px 12px; background:#17a2b8; color:white; border:none; border-radius:5px; cursor:pointer; }
+  #filterButtons button:hover { background:#117a8b; }
 
   /* Counter */
-  #counter { font-weight: bold; margin-top: 10px; color: green; }
+  #counter { font-weight:bold; margin-top:10px; color:green; }
 
   /* Cards */
-  #container {
-    margin-top: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;
-  }
-
-  .card {
-    background: white;
-    padding: 15px;
-    width: 280px;
-    border-radius: 10px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    text-align: left;
-    position: relative;
-  }
-  .card img {
-    width: 100%;
-    height: 140px;
-    object-fit: cover;
-    border-radius: 8px;
-    margin-bottom: 8px;
-  }
-  .card iframe {
-    width: 100%;
-    height: 160px;
-    border-radius: 8px;
-    margin-top: 8px;
-  }
-  .delete-btn, .edit-btn, .save-btn {
-    position: absolute;
-    top: 10px;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    color: white;
-  }
-  .delete-btn { background: red; right: 10px; }
-  .edit-btn { background: orange; right: 60px; }
-  .save-btn { background: green; margin-top:5px; position: static; display: inline-block; }
+  #container { margin-top:20px; display:flex; flex-wrap:wrap; justify-content:center; gap:15px; }
+  .card { background:white; padding:15px; width:280px; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1); text-align:left; position:relative; }
+  .card img { width:100%; height:140px; object-fit:cover; border-radius:8px; margin-bottom:8px; }
+  .card iframe { width:100%; height:160px; border-radius:8px; margin-top:8px; }
+  .delete-btn, .edit-btn, .save-btn { position:absolute; top:10px; border:none; padding:5px 10px; border-radius:5px; cursor:pointer; color:white; }
+  .delete-btn { background:red; right:10px; }
+  .edit-btn { background:orange; right:60px; }
+  .save-btn { background:green; margin-top:5px; position:static; display:inline-block; }
 </style>
 </head>
 <body>
 
-<!-- Top Menu -->
-<div id="topMenu">
+<!-- Top Menu Box -->
+<div id="topMenuBox">
   <div>
     <select id="languageSelect" onchange="changeLanguage()">
       <option value="en">English</option>
@@ -134,7 +64,7 @@
 
 <!-- Main Container -->
 <div class="main-container">
-  <div id="adminControls" style="display:none;">
+  <div id="adminControls">
     <button onclick="addCard()">Ƙara Card</button>
     <input type="text" id="searchBox" placeholder="Search Card..." onkeyup="searchCards()">
     <div id="filterButtons">
@@ -150,33 +80,36 @@
 </div>
 
 <script>
-  let isAdmin = false;
-  const adminPassword = "12345"; // simple password
+  let isAdmin=false;
 
   function loginAdmin(){
-    let pwd = prompt("Enter admin password:");
-    if(pwd === adminPassword){
-      isAdmin = true;
+    let pwd=prompt("Enter Admin Password:");
+    if(pwd==="Sawuta24@ADO"){
+      isAdmin=true;
       document.getElementById("adminControls").style.display="block";
       document.getElementById("welcomeMsg").innerText="Admin Logged In";
       alert("Welcome Admin!");
-    } else {
-      alert("Wrong password!");
-    }
+      // Add Edit/Delete buttons to existing cards
+      document.querySelectorAll(".card").forEach(card=>{
+        if(!card.querySelector(".edit-btn")){
+          card.innerHTML += `<button class="edit-btn" onclick="editCard(this)">Edit</button><button class="delete-btn" onclick="deleteCard(this)">X</button>`;
+        }
+      });
+    } else { alert("Wrong Password!"); }
   }
 
   function changeLanguage(){
-    let lang = document.getElementById("languageSelect").value;
-    if(lang === "ha"){
-      document.getElementById("searchBox").placeholder = "Nema Card...";
-      document.getElementById("counter").innerText = "Jimlar Cards: " + document.querySelectorAll(".card").length;
+    let lang=document.getElementById("languageSelect").value;
+    if(lang==="ha"){
+      document.getElementById("searchBox").placeholder="Nema Card...";
+      document.getElementById("counter").innerText="Jimlar Cards: "+document.querySelectorAll(".card").length;
       document.querySelectorAll("#filterButtons button")[0].innerText="Duka";
       document.querySelectorAll("#filterButtons button")[1].innerText="Ayyuka na Intanet";
       document.querySelectorAll("#filterButtons button")[2].innerText="Hako";
       document.querySelectorAll("#filterButtons button")[3].innerText="Kasuwanci";
     } else {
-      document.getElementById("searchBox").placeholder = "Search Card...";
-      document.getElementById("counter").innerText = "Total Cards: " + document.querySelectorAll(".card").length;
+      document.getElementById("searchBox").placeholder="Search Card...";
+      document.getElementById("counter").innerText="Total Cards: "+document.querySelectorAll(".card").length;
       document.querySelectorAll("#filterButtons button")[0].innerText="All";
       document.querySelectorAll("#filterButtons button")[1].innerText="Online Works";
       document.querySelectorAll("#filterButtons button")[2].innerText="Mining";
@@ -185,15 +118,15 @@
   }
 
   function updateCounter(){
-    document.getElementById("counter").innerText = (document.getElementById("languageSelect").value==="ha"?"Jimlar Cards: ":"Total Cards: ") + document.querySelectorAll(".card").length;
+    let lang=document.getElementById("languageSelect").value;
+    document.getElementById("counter").innerText=(lang==="ha"?"Jimlar Cards: ":"Total Cards: ")+document.querySelectorAll(".card").length;
   }
 
   function addCard(){
-    let category = prompt("Enter category: Online Works, Mining, Trading","Online Works") || "Online Works";
-    let newDiv = document.createElement("div");
+    let category=prompt("Enter category: Online Works, Mining, Trading","Online Works") || "Online Works";
+    let newDiv=document.createElement("div");
     newDiv.classList.add("card");
-    newDiv.dataset.category = category;
-
+    newDiv.dataset.category=category;
     newDiv.innerHTML=`
       <img src="https://via.placeholder.com/280x140" alt="banner">
       <h3>Card Title</h3>
@@ -206,18 +139,15 @@
     updateCounter();
   }
 
-  function deleteCard(button){
-    button.parentElement.remove();
-    updateCounter();
-  }
+  function deleteCard(button){ button.parentElement.remove(); updateCounter(); }
 
   function editCard(button){
-    let card = button.parentElement;
-    let title = card.querySelector("h3").innerText;
-    let desc = card.querySelector("p").innerText;
-    let imgSrc = card.querySelector("img").src;
-    let videoSrc = card.querySelector("iframe").src;
-    let category = card.dataset.category;
+    let card=button.parentElement;
+    let title=card.querySelector("h3").innerText;
+    let desc=card.querySelector("p").innerText;
+    let imgSrc=card.querySelector("img").src;
+    let videoSrc=card.querySelector("iframe").src;
+    let category=card.dataset.category;
 
     card.innerHTML=`
       <input type="text" id="editTitle" value="${title}" placeholder="Card Title">
@@ -233,12 +163,54 @@
       <button class="save-btn" onclick="saveCard(this)">Save</button>
       <button class="delete-btn" onclick="deleteCard(this)">X</button>
     `;
-    card.dataset.oldImg = imgSrc;
+    card.dataset.oldImg=imgSrc;
   }
 
   function saveCard(button){
-    let card = button.parentElement;
-    let title = card.querySelector("#editTitle").value;
-    let desc = card.querySelector("#editDesc").value;
-    let fileInput = card.querySelector("#editImg");
-    let videoLink = card.querySelector("#editVideo").
+    let card=button.parentElement;
+    let title=card.querySelector("#editTitle").value;
+    let desc=card.querySelector("#editDesc").value;
+    let fileInput=card.querySelector("#editImg");
+    let videoLink=card.querySelector("#editVideo").value;
+    let category=card.querySelector("#editCategory").value;
+    let oldImg=card.dataset.oldImg;
+
+    let embedLink=videoLink.replace("watch?v=","embed/");
+
+    if(fileInput.files && fileInput.files[0]){
+      let reader=new FileReader();
+      reader.onload=function(e){ updateCard(card,title,desc,e.target.result,embedLink,category); }
+      reader.readAsDataURL(fileInput.files[0]);
+    } else { updateCard(card,title,desc,oldImg,embedLink,category); }
+  }
+
+  function updateCard(card,title,desc,imgSrc,videoSrc,category){
+    card.innerHTML=`
+      <img src="${imgSrc}" alt="banner">
+      <h3>${title}</h3>
+      <p>${desc}</p>
+      <iframe src="${videoSrc}" frameborder="0" allowfullscreen></iframe>
+      <p><strong>Category:</strong> ${category}</p>
+      ${isAdmin?'<button class="edit-btn" onclick="editCard(this)">Edit</button><button class="delete-btn" onclick="deleteCard(this)">X</button>':''}
+    `;
+    card.dataset.category=category;
+    updateCounter();
+  }
+
+  function searchCards(){
+    let input=document.getElementById("searchBox").value.toLowerCase();
+    document.querySelectorAll(".card").forEach(card=>{
+      let title=card.querySelector("h3").innerText.toLowerCase();
+      card.style.display=title.includes(input)?"block":"none";
+    });
+  }
+
+  function filterCategory(category){
+    document.querySelectorAll(".card").forEach(card=>{
+      card.style.display=(category==="All" || card.dataset.category===category)?"block":"none";
+    });
+  }
+</script>
+
+</body>
+</html>
